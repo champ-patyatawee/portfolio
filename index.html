@@ -14,13 +14,52 @@
             padding: 0;
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        }
+
+        /* Scroll Animation Styles */
+        html {
             scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
 
         body {
             background-color: var(--background);
             color: var(--foreground);
             transition: background-color 0.3s ease;
+            /* Enable smooth scrolling on iOS */
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Parallax effect for hero section */
+        .main-content {
+            display: flex;
+            padding: 5rem 5rem;
+            background-color: var(--background);
+            min-height: 100vh;
+        }
+
+        /* Scroll animation for sections */
+        .main-content,
+        .services,
+        .customer,
+        .experience,
+        .projects,
+        .contact,
+        footer {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .main-content.visible,
+        .services.visible,
+        .customer.visible,
+        .experience.visible,
+        .projects.visible,
+        .contact.visible,
+        footer.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Navigation */
@@ -143,7 +182,7 @@
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             line-height: 1.2;
             margin-bottom: 2rem;
             font-family: gt-super, Georgia, Cambria, "Times New Roman", Times, serif;
@@ -183,7 +222,7 @@
 
         .service-category {
             background-color: var(--card);
-            padding: 2rem;
+            padding: 3rem;
             border-radius: 12px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
@@ -325,7 +364,7 @@
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background-color: var(--card);
+            background-color: var(--card-foreground);
             margin-right: 15px;
             display: flex;
             align-items: center;
@@ -419,45 +458,86 @@
 
         /* Footer */
         footer {
-            padding: 4rem 5rem;
+            padding: 4rem 5rem 2rem;
             background-color: var(--background);
             color: var(--foreground);
-        }
-
-        footer h2 {
-            font-size: 2.5rem;
-            font-family: gt-super, Georgia, Cambria, "Times New Roman", Times, serif;
-            color: var(--foreground);
+            border-top: 1px solid var(--border);
         }
 
         .footer-content {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .footer-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--foreground);
+        }
+
+        .footer-info p {
+            color: var(--muted-foreground);
+            max-width: 300px;
+            line-height: 1.6;
         }
 
         .footer-links {
             display: flex;
-            gap: 2rem;
+            gap: 3rem;
         }
 
-        .footer-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            text-decoration: none;
+        .footer-nav h4,
+        .footer-services h4,
+        .footer-connect h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
             color: var(--foreground);
-            transition: opacity 0.2s;
         }
 
-        .footer-link:hover {
-            opacity: 0.8;
+        .footer-nav ul,
+        .footer-services ul {
+            list-style: none;
         }
 
-        .footer-link i {
-            width: 20px;
-            height: 20px;
-            stroke-width: 1.5;
+        .footer-nav li,
+        .footer-services li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-nav a,
+        .footer-services a {
+            text-decoration: none;
+            color: var(--muted-foreground);
+            transition: color 0.2s;
+        }
+
+        .footer-nav a:hover,
+        .footer-services a:hover {
+            color: var(--primary);
+        }
+
+        .footer-connect .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer-connect .social-links a {
+            text-decoration: none;
+            color: var(--muted-foreground);
+            transition: color 0.2s;
+        }
+
+        .footer-connect .social-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--muted-foreground);
         }
 
         .mobile-menu {
@@ -634,6 +714,184 @@
             display: none;
         }
 
+        /* Contact Section */
+        .contact {
+            padding: 4rem 5rem;
+            background-color: var(--background);
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-family: gt-super, Georgia, Cambria, "Times New Roman", Times, serif;
+            color: var(--foreground);
+            text-align: center;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--foreground);
+        }
+
+        .contact-info p {
+            color: var(--muted-foreground);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .contact-details {
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .contact-icon i {
+            width: 20px;
+            height: 20px;
+            color: var(--primary-foreground);
+        }
+
+        .contact-label {
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-item p {
+            margin: 0;
+            color: var(--muted-foreground);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--foreground);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+            border-color: var(--primary);
+        }
+
+        .contact-form-container {
+            background-color: var(--card);
+            padding: 2rem;
+            border-radius: 12px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: var(--card-foreground);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input,
+        .form-textarea {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background-color: var(--background);
+            color: var(--foreground);
+            font-size: 1rem;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .form-submit:hover {
+            background-color: var(--accent);
+        }
+
+        .form-success,
+        .form-error {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .form-success {
+            background-color: rgba(72, 187, 120, 0.1);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+
+        .form-error {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--destructive);
+            border: 1px solid var(--destructive);
+        }
+
 
         /* Responsive styles */
         @media (max-width: 1200px) {
@@ -647,6 +905,11 @@
 
             .customers-grid {
                 grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
         }
 
@@ -668,7 +931,8 @@
             .services,
             .customer,
             .experience,
-            .projects {
+            .projects,
+            .contact {
                 padding: 2rem;
             }
 
@@ -752,6 +1016,18 @@
                 flex-direction: column;
                 gap: 1rem;
             }
+
+            .contact h2 {
+                font-size: 2rem;
+            }
+
+            .contact-info h3 {
+                font-size: 1.25rem;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
         }
 
         @media (max-width: 576px) {
@@ -834,12 +1110,60 @@
                     <i data-lucide="x"></i>
                 </button>
                 <div class="modal-header">
-                    <h2 class="modal-title">Contact Information</h2>
-                    <p class="modal-subtitle">Feel free to reach out through any of these channels</p>
+                    <h2 class="modal-title">Get In Touch</h2>
+                    <p class="modal-subtitle">Let's Talk About Your Project</p>
                 </div>
                 <div class="contact-info">
-                    <p class="contact-item"><strong>Email: &nbsp</strong> champ.patyatawee@gmail.com</p>
-                    <p class="contact-item"><strong>Line: &nbsp</strong> champ.patyatawee</p>
+                    <p>
+                        Have a project in mind or want to discuss potential opportunities? 
+                        Feel free to reach out through any of these channels.
+                    </p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i data-lucide="mail"></i>
+                            </div>
+                            <div>
+                                <p class="contact-label">Email</p>
+                                <p>champ.patyatawee@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i data-lucide="phone"></i>
+                            </div>
+                            <div>
+                                <p class="contact-label">Line</p>
+                                <p>champ.patyatawee</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i data-lucide="map-pin"></i>
+                            </div>
+                            <div>
+                                <p class="contact-label">Location</p>
+                                <p>Bangkok, Thailand</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/champ-patyatawee" class="social-link" target="_blank">
+                            <i data-lucide="github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/ChampPatyatawee/" class="social-link" target="_blank">
+                            <i data-lucide="linkedin"></i>
+                        </a>
+                        <a href="https://www.facebook.com/ChampPatyatawee/" class="social-link" target="_blank">
+                            <i data-lucide="facebook"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@ChampPatyatawee" class="social-link" target="_blank">
+                            <i data-lucide="youtube"></i>
+                        </a>
+                        <a href="https://www.facebook.com/TechByChampKung/" class="social-link" target="_blank">
+                            <i data-lucide="facebook"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -854,11 +1178,10 @@
         <div class="left-section">
             <h1>About Me</h1>
             <div class="about-content">
-                <p>Hello world! - I'm Champ Patyatawee,</p>
-                <p>Software engineer who loves helping startups and small businesses grow and succeed.</p>
+                <p>Hello world, I’m Champ Patyatawee —</p>
+                <p>a freelance engineer specializing in Cloud Architecture and AI Applications.</p>
                
-                <p>I believe in making complex tech simple and keeping you in the loop every step of the way.
-                </p>
+                <p>I design scalable systems, automate development pipelines, and build AI-powered solutions that help businesses grow.</p>
                 <p>Whether you're launching a new idea or improving an existing system, I'm here to help turn your
                     challenges into real progress.</p>
 
@@ -878,8 +1201,6 @@
             <div class="service-category">
                 <h3>Pay-as-you-go</h3>
                 <ul class="service-list">
-                    <li class="service-item">Web Development: Build responsive, modern websites and web apps.</li>
-                    <li class="service-item">API Development: Design and develop secure, scalable APIs.</li>
                     <li class="service-item">AI Application Development: Integrate machine learning into real-world
                         apps.</li>
                     <li class="service-item">DevOps Implementation – Streamline your development and deployment process
@@ -1068,21 +1389,56 @@
 
     <footer>
         <div class="footer-content">
-            <h2>Let's Connect</h2>
-            <div class="footer-links">
-                <a href="mailto:champ.patyatawee@gmail.com" class="footer-link">
-                    <i data-lucide="mail"></i>
-                    <span>Email</span>
-                </a>
-                <a href="https://www.linkedin.com/in/ChampPatyatawee/" target="_blank" class="footer-link">
-                    <i data-lucide="linkedin"></i>
-                    <span>LinkedIn</span>
-                </a>
-                <a href="https://www.facebook.com/ChampPatyatawee/" target="_blank" class="footer-link">
-                    <i data-lucide="facebook"></i>
-                    <span>Facebook</span>
-                </a>
+            <div class="footer-info">
+                <h3>Champ Patyatawee</h3>
+                <p>Designing scalable systems, automating development pipelines, and building AI-powered solutions that help businesses grow.</p>
             </div>
+            
+            <div class="footer-links">
+                <div class="footer-nav">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#customers">Customers</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-services">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#services">Pay-as-you-go</a></li>
+                        <li><a href="#services">Contract</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-connect">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/ChampPatyatawee/" target="_blank">
+                            LinkedIn
+                        </a>
+                        <a href="https://www.facebook.com/ChampPatyatawee/" target="_blank">
+                            Facebook
+                        </a>
+                        <a href="https://github.com/champ-patyatawee" target="_blank">
+                            GitHub
+                        </a>
+                        <a href="https://www.youtube.com/@ChampPatyatawee" target="_blank">
+                            YouTube
+                        </a>
+                        <a href="https://www.facebook.com/TechByChampKung/" target="_blank">
+                            Facebook Page
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Champ Patyatawee. All rights reserved.</p>
         </div>
     </footer>
 
@@ -1113,12 +1469,12 @@
                     mobileMenu.classList.remove('active');
                 }
             });
+            
+            // Modal functionality
             const modal = document.getElementById('contact-modal');
             const hireMeBtn = document.getElementById('hire-me-btn');
             const hireMeMobileBtn = document.getElementById('hire-me-mobile-btn');
             const modalCloseBtn = document.querySelector('.modal-close');
-            const contactForm = document.getElementById('contact-form');
-            const formSuccess = document.getElementById('form-success');
             
             // Open modal
             hireMeBtn.addEventListener('click', function() {
@@ -1145,6 +1501,46 @@
                     document.body.style.overflow = '';
                 }
             });
+
+            // Scroll animation functionality
+            const sections = document.querySelectorAll('.main-content, .services, .customer, .experience, .projects, .contact, footer');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Enhanced scroll behavior for iPhone-like experience
+            let startY = 0;
+            let startX = 0;
+            
+            document.addEventListener('touchstart', function(e) {
+                startY = e.touches[0].pageY;
+                startX = e.touches[0].pageX;
+            }, { passive: false });
+            
+            document.addEventListener('touchmove', function(e) {
+                const deltaY = e.touches[0].pageY - startY;
+                const deltaX = e.touches[0].pageX - startX;
+                
+                // Only prevent default if we're scrolling vertically
+                if (Math.abs(deltaY) > Math.abs(deltaX)) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
         
         });
     </script>
